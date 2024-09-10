@@ -1,0 +1,364 @@
+/*-----------------------------------*\
+  #style.css
+\*-----------------------------------*/
+
+
+:root{
+    --primary: #B5A1E5;
+  --on-primary: #100E17;
+  --background: #131214;
+  --on-background: #EAE6F2;
+  --surface: #1D1C1F;
+  --on-surface: #DDDAE5;
+  --on-surface-variant: #7B7980;
+  --on-surface-variant-2: #B9B6BF;
+  --outline: #3E3D40;
+  --bg-aqi-1: #89E589;
+  --on-bg-aqi-1: #1F331F;
+  --bg-aqi-2: #E5DD89;
+  --on-bg-aqi-2: #33311F;
+  --bg-aqi-3: #E5C089;
+  --on-bg-aqi-3: #332B1F;
+  --bg-aqi-4: #E58989;
+  --on-bg-aqi-4: #331F1F;
+  --bg-aqi-5: #E589B7;
+  --on-bg-aqi-5: #331F29;
+  --white: hsl(0, 0%, 100%);
+  --white-alpha-4: hsla(0, 0%, 100%, 0.04);
+  --white-alpha-8: hsla(0, 0%, 100%, 0.08);
+  --black-alpha-10: hsla(0, 0%, 0%, 0.1);
+  }
+
+
+
+
+  /*-----------------------------------*\
+    #CUSTOM PROPERTY
+  \*-----------------------------------*/
+
+  .heading{
+    font-size: 1.6rem;
+    font-weight: 500;
+    margin-bottom: 2rem;
+    color: var(--on-background);
+  }
+
+  main{
+    padding: 1.2rem;
+  }
+
+  .rounded-xl{
+    border-radius: 50%;
+  }
+
+  .rounded-sm{
+    border-radius: 1.2rem;
+  }
+
+
+
+
+  /*-----------------------------------*\
+    #RESET
+  \*-----------------------------------*/
+
+  *{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-size: 62.5%;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+  }
+
+  body{
+    font-family: 'Poppins', sans-serif;
+    background-color: var(--background);
+    color: var(--on-background);
+    font-size: 16px;
+
+  }
+
+  main{
+    input{
+      width: 100%;
+      padding: 2rem;
+      border: none;
+      background-color: var(--surface);
+      margin-bottom: 2rem;
+      color: var(--on-background);
+      font-size: 1.6rem;
+
+      &:focus,&:focus-visible{
+        outline:none;
+
+      }
+
+      &::placeholder{
+        color: var(--on-surface-variant);
+        font-size: 1.6rem;
+
+      }
+    }
+
+  }
+
+
+
+  /*-----------------------------------*\
+    #MATERIAL ICON
+  \*-----------------------------------*/
+
+
+
+
+
+  /*-----------------------------------*\
+    #REUSED STYLE
+  \*-----------------------------------*/
+
+
+
+
+
+  /*-----------------------------------*\
+    #HEADER
+  \*-----------------------------------*/
+
+  .nav{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 3rem 2rem;
+
+
+    .actions{
+      display: flex;
+      gap: 1rem;
+
+
+      li{
+        display: flex;
+        align-items: center;
+        padding: 0.5rem;
+       background-color: var(--surface);
+
+       height: 3.8rem;
+        width: 3.8rem;
+        border-radius: 50%;
+
+        cursor: pointer;
+        svg{
+          z-index: 200;
+          display: block;
+        }
+      }
+    }
+
+  }
+
+  /*-----------------------------------*\
+    #CURRENT WEATHER
+  \*-----------------------------------*/
+  .current-temp{
+    background-color: var(--surface);
+    padding: 1.2rem 0.8rem;
+    margin-bottom: 4rem;
+    .current-temp-box{
+      width:100%;
+      padding: 2rem 1.8rem;
+      .temp-container{
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        gap: 1rem;
+        .temp-value{
+          font-size: 4.8rem;
+          font-weight: 500;
+        }
+        .temp-description{
+          font-size: 1.4rem;
+          font-weight: 500;
+        }
+    }
+    }
+    hr{
+      border: none;
+      height: 1px;
+      background-color: var(--outline);
+      margin: 1.6rem 0;
+    }
+    .location-info{
+
+      li{
+        height: 2.8rem;
+        display: flex;
+        align-items: center;
+        justify-content: start;
+        gap: .9rem;
+        p{
+          font-size: 1.4rem;
+
+        }
+        svg{
+         height: 2.4rem;
+        }
+      }
+    }
+  }
+
+
+
+
+
+
+
+
+  /*-----------------------------------*\
+    #HIGHLIGHTS
+  \*-----------------------------------*/
+  .today-highligths{
+    background-color: var(--surface);
+    border-radius: 1.2rem;
+
+
+    .today-highligths-text{
+      font-size: 1.6rem;
+      margin: 2rem 0;
+    }
+  }
+
+
+
+
+  /*-----------------------------------*\
+    #HOURLY FORECAST
+  \*-----------------------------------*/
+
+  .today-highligths{
+    padding: 1.6rem;
+    display: flex;
+    gap: 1.6rem;
+    flex-direction: column;
+  }
+
+  .today-highligths-temp{
+    display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  }
+
+  .forecast-by-hour-container{
+    display: flex;
+    overflow-x: scroll;
+    gap: 1.6rem;
+
+   scroll-snap-type: x mandatory;
+   &::-webkit-scrollbar {
+      display: none;
+    }
+    p{
+      font-size: 1.4rem;
+      font-weight: bolder;
+      margin: 2rem 0;
+    }
+
+    div{
+      display: flex;
+      flex-direction: column;
+      width: 12.5rem;
+      height: 21rem;
+      align-items: center;
+      background-color: var(--background);
+      padding: .7rem 1.2rem;
+    }
+  }
+
+
+
+
+  /*-----------------------------------*\
+    #FORECAST
+  \*-----------------------------------*/
+  .forecast-text{
+    margin: 2rem 0;
+    font-size: 1.6rem;
+  }
+
+  .forecast{
+    background-color: var(--surface);
+    width: 100%;
+    margin-bottom: 3rem;
+
+    hr{
+      border: none;
+      height: 1px;
+      background-color: var(--outline);
+      margin: 1.6rem 0;
+    }
+    .forecast-container:last-child{
+      padding-bottom: 3.6rem;
+    }
+
+    .forecast-container{
+      padding: 1.6rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      .forecast-item{
+        display: flex;
+        align-items: center;
+        gap: 0.6rem;
+      }
+
+      p{
+        font-size: 1.4rem;
+        font-weight: bolder;
+      }
+
+      .forecast-date{
+        font-size: 2rem;
+      }
+      img{
+        width: 2rem;
+        height: 2rem;
+      }
+
+    }
+
+  }
+
+
+
+
+
+  /*-----------------------------------*\
+    #LOADING
+  \*-----------------------------------*/
+
+
+
+
+
+  /*-----------------------------------*\
+    #ERROR SECTION
+  \*-----------------------------------*/
+
+
+
+
+
+  /*-----------------------------------*\
+    #FOOTER
+  \*-----------------------------------*/
+
+  footer{
+    text-align: center;
+    font-size: 2rem;
+    padding: 2rem;
+  }
+
+
+
+  /*-----------------------------------*\
+    #MEDIA QUERIES
+  \*-----------------------------------*/
