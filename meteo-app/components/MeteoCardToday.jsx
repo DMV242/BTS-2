@@ -1,9 +1,17 @@
+import { motion } from 'framer-motion'
 import Image from 'next/image'
 import React from 'react'
 
-export const MeteoCardToday = () => {
+
+export const MeteoCardToday = ({ isAnimationStart }) => {
     return (
-        <section class="current-temp rounded-sm">
+        <motion.section class="current-temp rounded-sm"
+            initial={{ opacity: 1, y: 0 }}
+            animate={isAnimationStart ? { opacity: 0, y: 0 } : { opacity: 1, y: -15 }}
+            exit={{ opacity: 0, y: 0 }}
+            transition={{ duration: 0.5, ease: 'easeInOut' }}
+            whileHover={{ scale: 1.009, transition: { duration: 0.3, ease: 'easeInOut' } }}
+            whileFocus={{ scale: 1.009, transition: { duration: 0.3, ease: 'easeInOut' } }} >
             <div class="current-temp-box">
                 <p class="heading">Aujourd'hui</p>
                 <div class="current-temp-contaner">
@@ -46,6 +54,6 @@ export const MeteoCardToday = () => {
 
             </div>
 
-        </section>
+        </motion.section>
     )
 }
