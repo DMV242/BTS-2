@@ -7,7 +7,7 @@ export const MeteoCardToday = ({ isAnimationStart }) => {
     return (
         <motion.section class="current-temp rounded-sm"
             initial={{ opacity: 1, y: 0 }}
-            animate={isAnimationStart ? { opacity: 0, y: 0 } : { opacity: 1, y: 0 }}
+            animate={isAnimationStart ? { opacity: 0, y: 0, pointerEvents: "none" } : { opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: 0 }}
             transition={{ duration: 0.5, ease: 'easeInOut' }}
             whileHover={{ scale: 1.009, transition: { duration: 0.3, ease: 'easeInOut' } }}

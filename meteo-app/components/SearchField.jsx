@@ -17,7 +17,6 @@ const SearchField = ({ isSearchVisible, setIsAnimationStart }) => {
                 <form onSubmit={(e) => {
                     e.preventDefault()
                     alert('Recherche effectuée')
-
                 }}>
                     <motion.input
                         key="searchInput"
