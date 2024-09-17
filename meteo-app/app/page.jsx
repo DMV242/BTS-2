@@ -6,6 +6,11 @@ import { MeteoCardToday } from "@/components/MeteoCardToday";
 import NavBar from "@/components/NavBar";
 import SearchField from "@/components/SearchField";
 import { useEffect, useState } from "react";
+import { ToastContainer } from "react-toastify";
+import 'react-toastify/dist/ReactToastify.css';
+
+
+
 
 
 export default function Home() {
@@ -34,6 +39,7 @@ export default function Home() {
       <MeteoCardToday isAnimationStart={isAnimationStart} />
       <Forecast />
       <Highligths />
+      <ToastContainer />
     </main>
   );
 

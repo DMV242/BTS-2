@@ -1,7 +1,9 @@
 import { motion, AnimatePresence } from 'framer-motion';
-import React from 'react';
+import React, { useRef } from 'react';
+import { toast } from 'react-toastify';
 
 const SearchField = ({ isSearchVisible, setIsAnimationStart }) => {
+    const toastRef = useRef(null)
 
     const animateParams = {
         scale: 1.009,
@@ -16,7 +18,23 @@ const SearchField = ({ isSearchVisible, setIsAnimationStart }) => {
             {isSearchVisible && (
                 <form onSubmit={(e) => {
                     e.preventDefault()
-                    alert('Recherche effectuée')
+                    toastRef.current = toast("In progress", {
+                        style: {
+                            color: "white",
+                            backgroundColor: " var(--surface)",
+                            fontSize: 38
+                        },
+
+                        isLoading: true,
+                    });
+                    setTimeout(() => {
+                        toast.update(toastRef.current, { type: "success", autoClose: 5000, isLoading: false, render: "City found" });
+
+                    }, 3000);
+
+
+
+
                 }}>
                     <motion.input
                         key="searchInput"
