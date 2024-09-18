@@ -18,7 +18,7 @@ const SearchField = ({ isSearchVisible, setIsAnimationStart }) => {
             {isSearchVisible && (
                 <form onSubmit={(e) => {
                     e.preventDefault()
-                    toastRef.current = toast("In progress", {
+                    toastRef.current = toast("Recherche en cours", {
                         style: {
                             color: "white",
                             backgroundColor: " var(--surface)",
@@ -28,7 +28,7 @@ const SearchField = ({ isSearchVisible, setIsAnimationStart }) => {
                         isLoading: true,
                     });
                     setTimeout(() => {
-                        toast.update(toastRef.current, { type: "success", autoClose: 5000, isLoading: false, render: "City found" });
+                        toast.update(toastRef.current, { type: "success", autoClose: 5000, isLoading: false, render: "Recherche terminée" });
 
                     }, 3000);
 
