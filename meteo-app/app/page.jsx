@@ -1,4 +1,5 @@
 "use client";
+import Footer from "@/components/Footer";
 import Forecast from "@/components/Forecast";
 import Highligths from "@/components/Highligths";
 import Loader from "@/components/Loader";
@@ -32,15 +33,17 @@ export default function Home() {
   }
   return (
 
-
-    <main>
-      <NavBar setIsSearchvisible={setIsSearchvisible} isSearchVisible={isSearchvisible} setIsAnimationStart={setIsAnimationStart} />
-      <SearchField isSearchVisible={isSearchvisible} setIsSearchvisible={setIsSearchvisible} setIsAnimationStart={setIsAnimationStart} />
-      <MeteoCardToday isAnimationStart={isAnimationStart} />
-      <Forecast />
-      <Highligths />
-      <ToastContainer />
-    </main>
+    <>
+      <main>
+        <NavBar setIsSearchvisible={setIsSearchvisible} isSearchVisible={isSearchvisible} setIsAnimationStart={setIsAnimationStart} />
+        <SearchField isSearchVisible={isSearchvisible} setIsSearchvisible={setIsSearchvisible} setIsAnimationStart={setIsAnimationStart} />
+        <MeteoCardToday isAnimationStart={isAnimationStart} />
+        <Forecast />
+        <Highligths />
+        <ToastContainer />
+      </main>
+      <Footer />
+    </>
   );
 
 
