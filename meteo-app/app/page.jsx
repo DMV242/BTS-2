@@ -1,55 +1,40 @@
 "use client";
-import Footer from "@/components/Footer";
-import Forecast from "@/components/Forecast";
-import Highligths from "@/components/Highligths";
-import Loader from "@/components/Loader";
-import { MeteoCardToday } from "@/components/MeteoCardToday";
-import NavBar from "@/components/NavBar";
-import SearchField from "@/components/SearchField";
-import { useEffect, useState } from "react";
-import { ToastContainer } from "react-toastify";
-import 'react-toastify/dist/ReactToastify.css';
+
+import Button from '@/components/Button';
+import Footer from '@/components/Footer';
+import NavBar from '@/components/NavBar'
+import SearchField from '@/components/SearchField';
 
 
 
+import React from 'react'
+
+function page() {
 
 
-export default function Home() {
-
-  const [isLoading, setIsLoading] = useState(true);
-  const [isSearchvisible, setIsSearchvisible] = useState(false);
-  const [isAnimationStart, setIsAnimationStart] = useState(false);
-
-  useEffect(() => {
-    setTimeout(() => {
-      setIsLoading(false);
-    }, 1500);
-  }, []);
-
-  if (isLoading) {
     return (
-      <Loader />
-    );
-  }
-  return (
+        <main>
+            <NavBar />
+            <SearchField isSearchVisible={true} />
+            <div style={{
+                display: "flex",
+                justifyContent: "center",
+                alignItems: "center",
+                flexDirection: "column",
+                height: "100%",
 
-    <>
-      <main>
-        <NavBar setIsSearchvisible={setIsSearchvisible} isSearchVisible={isSearchvisible} setIsAnimationStart={setIsAnimationStart} />
-        <SearchField isSearchVisible={isSearchvisible} setIsSearchvisible={setIsSearchvisible} setIsAnimationStart={setIsAnimationStart} />
-        <MeteoCardToday isAnimationStart={isAnimationStart} />
-        <Forecast />
-        <Highligths />
-        <ToastContainer />
-      </main>
-      <Footer />
-    </>
-  );
+            }}>
+                <p style={{
+                    textAlign: "center",
+                    fontSize: "2rem",
+                    marginTop: "2rem",
+                }}>Vous voulez voir la météo de ville ? : Madrid</p>
+                <Button />
+            </div>
 
-
-
-
-
-
+            <Footer ishomepage={true} />
+        </main>
+    )
 }
 
+export default page

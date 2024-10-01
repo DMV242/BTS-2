@@ -1,9 +1,13 @@
 import { motion, AnimatePresence } from 'framer-motion';
+import { useRouter } from 'next/navigation';
 import React, { useRef } from 'react';
 import { toast } from 'react-toastify';
 
-const SearchField = ({ isSearchVisible, setIsAnimationStart }) => {
+
+const SearchField = ({ isSearchVisible, setIsAnimationStart, initialState }) => {
     const toastRef = useRef(null)
+    const router = useRouter();
+    const ville = "Mardid";
 
     const animateParams = {
         scale: 1.009,
@@ -14,7 +18,7 @@ const SearchField = ({ isSearchVisible, setIsAnimationStart }) => {
     };
 
     return (
-        <AnimatePresence onExitComplete={() => setIsAnimationStart(false)}>
+        <AnimatePresence onExitComplete={() => setIsAnimationStart?.(false)}>
             {isSearchVisible && (
                 <form onSubmit={(e) => {
                     e.preventDefault()
@@ -31,10 +35,7 @@ const SearchField = ({ isSearchVisible, setIsAnimationStart }) => {
                         toast.update(toastRef.current, { type: "success", autoClose: 5000, isLoading: false, render: "Recherche terminée" });
 
                     }, 3000);
-
-
-
-
+                    router.push(`/meteo/${ville}`);
                 }}>
                     <motion.input
                         key="searchInput"
@@ -42,7 +43,7 @@ const SearchField = ({ isSearchVisible, setIsAnimationStart }) => {
                         className="search rounded-sm"
                         placeholder="Rechercher une ville"
 
-                        initial={{ scale: 0.9, x: 1000 }}
+                        initial={initialState ? initialState : { x: 0, scale: 0 }}
                         animate={{ scale: 1, x: 0 }}
                         exit={{
                             opacity: 0,

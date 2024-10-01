@@ -117,7 +117,10 @@
   /*-----------------------------------*\
     #REUSED STYLE
   \*-----------------------------------*/
-
+.card-link{
+  color: var(--on-surface);
+  text-decoration: none;
+}
 
 
 
@@ -436,7 +439,7 @@
 
 
 @media screen and (min-width: 768px) {
- main {
+.home-container {
    display: grid;
    gap: 1rem;
    grid-template-columns: repeat(4,  1fr);

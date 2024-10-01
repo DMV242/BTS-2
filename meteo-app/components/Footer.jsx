@@ -3,10 +3,11 @@ import { motion } from 'framer-motion';
 import React from 'react'
 
 
-function Footer() {
+function Footer({ ishomepage }) {
     return (
         <motion.footer
             className="footer"
+            style={ishomepage ? { position: "absolute", bottom: 0, } : null}
             initial={{ opacity: 0, y: 0 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5 }}

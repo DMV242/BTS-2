@@ -1,4 +1,5 @@
 import Image from "next/image";
+import Link from "next/link";
 
 
 
@@ -7,13 +8,15 @@ function NavBar({ isSearchVisible, setIsSearchvisible, setIsAnimationStart }) {
     return (
         <nav className="nav">
             <div>
-                <Image src="/images/logo.png" alt="logo" width={150} height={24} />
+                <Link href={"/"}>
+                    <Image src="/images/logo.png" alt="logo" width={150} height={24} />
+                </Link>
             </div>
             <div>
                 <ul className="actions">
                     <li className="btn rounded-xl" onClick={() => {
-                        setIsSearchvisible((prev) => !prev)
-                        setIsAnimationStart(true)
+                        setIsSearchvisible?.((prev) => !prev)
+                        setIsAnimationStart?.(true)
                     }}>
                         {isSearchVisible ?
                             <svg xmlns="http://www.w3.org/2000/svg" fill="none" color="#fff" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
