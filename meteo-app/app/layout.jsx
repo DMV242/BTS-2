@@ -1,4 +1,6 @@
+import WeatherProvider from "@/context/weatherContext";
 import "./style.css";
+
 
 
 
@@ -7,7 +9,11 @@ import "./style.css";
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
-      <body>{children}</body>
+      <body>
+        <WeatherProvider>
+          {children}
+        </WeatherProvider>
+      </body>
 
     </html>
   );

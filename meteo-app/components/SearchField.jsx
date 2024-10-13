@@ -1,13 +1,13 @@
+import { useWeather } from '@/context/weatherContext';
 import { motion, AnimatePresence } from 'framer-motion';
-import { useRouter } from 'next/navigation';
 import React, { useRef } from 'react';
 import { toast } from 'react-toastify';
 
 
-const SearchField = ({ isSearchVisible, setIsAnimationStart, initialState }) => {
+const SearchField = ({ isSearchVisible, setIsAnimationStart, initialState, setIsSearchvisible, ishome }) => {
     const toastRef = useRef(null)
-    const router = useRouter();
-    const ville = "Mardid";
+    const { city, searchCity, setSearchCity, fetchWeatherByCityName, setCity, fetchForecastData } = useWeather();
+
 
     const animateParams = {
         scale: 1.009,
@@ -20,8 +20,11 @@ const SearchField = ({ isSearchVisible, setIsAnimationStart, initialState }) => 
     return (
         <AnimatePresence onExitComplete={() => setIsAnimationStart?.(false)}>
             {isSearchVisible && (
-                <form onSubmit={(e) => {
+                <form onSubmit={async (e) => {
                     e.preventDefault()
+
+                    if (ishome) return;
+
                     toastRef.current = toast("Recherche en cours", {
                         style: {
                             color: "white",
@@ -31,18 +34,19 @@ const SearchField = ({ isSearchVisible, setIsAnimationStart, initialState }) => 
 
                         isLoading: true,
                     });
-                    setTimeout(() => {
-                        toast.update(toastRef.current, { type: "success", autoClose: 5000, isLoading: false, render: "Recherche terminée" });
+                    await fetchWeatherByCityName(searchCity);
+                    await fetchForecastData(searchCity);
+                    setCity(searchCity);
+                    toast.update(toastRef.current, { type: "success", autoClose: 5000, isLoading: false, render: "Recherche terminée" });
+                    setIsSearchvisible?.(false);
 
-                    }, 3000);
-                    router.push(`/meteo/${ville}`);
                 }}>
                     <motion.input
                         key="searchInput"
                         type="text"
                         className="search rounded-sm"
                         placeholder="Rechercher une ville"
-
+                        defaultValue={city}
                         initial={initialState ? initialState : { x: 0, scale: 0 }}
                         animate={{ scale: 1, x: 0 }}
                         exit={{
@@ -53,7 +57,8 @@ const SearchField = ({ isSearchVisible, setIsAnimationStart, initialState }) => 
                                 ease: 'easeInOut',
                             },
                         }}
-
+                        value={searchCity}
+                        onChange={(e) => setSearchCity(e.target.value)}
                         whileHover={animateParams}
                         whileFocus={animateParams}
                     />

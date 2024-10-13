@@ -3,7 +3,7 @@ import { useRouter } from 'next/navigation'
 import React from 'react'
 
 
-function Button() {
+function Button({ city }) {
 
     const router = useRouter();
     return (
@@ -25,7 +25,7 @@ function Button() {
                 duration: 0.5,
             }
         }} onClick={() => {
-            router.push("/meteo/Madrid")
+            router.push(`/meteo/${city}`)
         }} > Confirmer &rarr;</ motion.button>
     )
 }
