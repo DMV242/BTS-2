@@ -57,6 +57,7 @@ const SearchField = ({ isSearchVisible, setIsAnimationStart, initialState, setIs
                                 ease: 'easeInOut',
                             },
                         }}
+                        required
                         value={searchCity}
                         onChange={(e) => setSearchCity(e.target.value.trim())}
                         whileHover={animateParams}
