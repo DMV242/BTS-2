@@ -50,7 +50,7 @@ const Forecast = () => {
                     onClick={() => {
                         step < 34 ? setStep((step) => step + 5) : setStep(0)
                     }}
-                > Avaner le temps </button>
+                > Avancer le temps </button>
             </div>
         </section >
     )
