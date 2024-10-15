@@ -44,6 +44,14 @@ function NavBar({ isSearchVisible, setIsSearchvisible, setIsAnimationStart, isho
                     </li>
                     {!ishome ?
                         <li className="btn rounded-xl" onClick={() => {
+
+                            if (geolocation) {
+                                const res = confirm("Voulez-vous annuler la géolocalisation ? ");
+                                if (res) {
+                                    setIsGeolocation(false);
+                                    return;
+                                }
+                            }
                             const getGeolocation = () => {
                                 if (navigator.geolocation) {
                                     ref.current = toast("Récupération de la géolocalisation", {
