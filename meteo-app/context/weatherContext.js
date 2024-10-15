@@ -38,6 +38,23 @@ function WeatherProvider({ children }) {
         }
         setLoading(false);
     };
+    async function fetchWeatherByCoordonates(lon, lat) {
+        setLoading(true);
+        try {
+            const response = await fetch(`https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${process.env.NEXT_PUBLIC_API_KEY}&lang=fr`);
+            if (!response.ok) {
+                throw new Error("Weather data not found");
+            }
+            const data = await response.json();
+
+            setWeatherData(data);
+            setCity(data.name)
+            setError(null);
+        } catch (error) {
+            setError(error.message);
+        }
+        setLoading(false);
+    };
     const fetchForecastData = async (city) => {
         setisLoadingForecast(true);
         try {
@@ -82,7 +99,8 @@ function WeatherProvider({ children }) {
             isLoadingForecast,
             forecastData,
             forecastError,
-            fetchWeatherByCityName
+            fetchWeatherByCityName,
+            fetchWeatherByCoordonates
         }}>
             {children}
         </weatherContext.Provider>

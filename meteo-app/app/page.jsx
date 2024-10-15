@@ -14,7 +14,7 @@ function Page() {
     return (
 
         <main>
-            <NavBar />
+            <NavBar ishome={true} />
             <SearchField isSearchVisible={true} ishome={true} />
             <div style={{
                 display: "flex",

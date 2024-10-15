@@ -1,10 +1,21 @@
+import { useGeolocation } from "@/context/geolacationContext";
+import { useWeather } from "@/context/weatherContext";
 import Image from "next/image";
 import Link from "next/link";
+import { useRef, useState } from "react";
+import { toast } from "react-toastify";
 
 
 
 
-function NavBar({ isSearchVisible, setIsSearchvisible, setIsAnimationStart }) {
+function NavBar({ isSearchVisible, setIsSearchvisible, setIsAnimationStart, ishome }) {
+
+
+    const { fetchWeatherByCoordonates } = useWeather();
+    const [geolocation, setIsGeolocation] = useState(false);
+    const ref = useRef()
+
+
     return (
         <nav className="nav">
             <div>
@@ -31,18 +42,55 @@ function NavBar({ isSearchVisible, setIsSearchvisible, setIsAnimationStart }) {
                         }
 
                     </li>
-                    <li className="btn rounded-xl">
-                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" color="#fff" viewBox="0 0 24 24" stroke-width="1.5"
-                            stroke="currentColor" className="size-6">
-                            <path stroke-linecap="round" stroke-linejoin="round"
-                                d="M15 10.5a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" />
-                            <path stroke-linecap="round" stroke-linejoin="round"
-                                d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1 1 15 0Z" />
-                        </svg>
-                    </li>
+                    {!ishome ?
+                        <li className="btn rounded-xl" onClick={() => {
+                            const getGeolocation = () => {
+                                if (navigator.geolocation) {
+                                    navigator.geolocation.getCurrentPosition(successCallback, errorCallback);
+                                } else {
+                                    console.log("Geolocation is not supported by this browser.");
+                                }
+
+                                function successCallback(position) {
+                                    ref.current = toast("Récupération de la géolocalisation", {
+                                        style: {
+                                            color: "white",
+                                            backgroundColor: " var(--surface)",
+                                            fontSize: 38
+                                        },
+                                        isLoading: true,
+                                    });
+                                    fetchWeatherByCoordonates(position.coords.longitude, position.coords.latitude)
+                                    setIsGeolocation(true);
+                                    toast.update(ref.current, { type: "success", autoClose: 5000, isLoading: false, render: "Recupération terminée" });
+                                }
+
+                                function errorCallback(error) {
+                                    toast("Erreur lors de la récupération de la géolocalisation", {
+                                        style: {
+                                            color: "white",
+                                            backgroundColor: " var(--surface)",
+                                            fontSize: 38
+                                        },
+                                    })
+                                }
+                            }
+                            getGeolocation()
+                        }
+                        } style={{
+                            backgroundColor: geolocation ? "blue" : null
+                        }}>
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" color="#fff" viewBox="0 0 24 24" stroke-width="1.5"
+                                stroke="currentColor" className="size-6">
+                                <path stroke-linecap="round" stroke-linejoin="round"
+                                    d="M15 10.5a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" />
+                                <path stroke-linecap="round" stroke-linejoin="round"
+                                    d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1 1 15 0Z" />
+                            </svg>
+                        </li> : null}
                 </ul>
             </div>
-        </nav>
+        </nav >
     );
 }
 

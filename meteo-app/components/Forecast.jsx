@@ -20,7 +20,7 @@ const Forecast = () => {
                                     <p>{parseInt(data.main.temp - 273.15)}°C</p>
                                 </div>
                                 <div class="forecast-date">
-                                    <p>{new Date(data.dt * 1000).toLocaleDateString('fr-FR', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' })}</p>
+                                    <p>{new Date(data.dt * 1000).toLocaleDateString('fr-FR', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' })[0].toUpperCase() + new Date(data.dt * 1000).toLocaleDateString('fr-FR', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' }).slice(1)}</p>
                                 </div>
                                 <div class="forecast-date">
                                     <p>{data.dt_txt.slice(11, 16)}</p>
@@ -34,6 +34,27 @@ const Forecast = () => {
 
             </div>
             <div>
+                {
+                    step >= 5 ?
+                        <button style={{
+                            backgroundColor: "var(--on-surface)",
+                            color: "var(--surface)",
+                            padding: "1rem",
+                            fontSize: "1.5rem",
+                            borderRadius: "1rem",
+                            cursor: "pointer",
+                            border: "none",
+                            outline: "none",
+                            marginLeft: "1rem",
+                            marginBottom: "6px",
+                        }}
+
+                            onClick={() => {
+                                step > 5 ? setStep((step) => step - 5) : setStep(0)
+                            }}
+                        > Repartir en arrière </button> : null
+                }
+
                 <button style={{
                     backgroundColor: "var(--on-surface)",
                     color: "var(--surface)",
