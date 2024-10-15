@@ -46,12 +46,6 @@ function NavBar({ isSearchVisible, setIsSearchvisible, setIsAnimationStart, isho
                         <li className="btn rounded-xl" onClick={() => {
                             const getGeolocation = () => {
                                 if (navigator.geolocation) {
-                                    navigator.geolocation.getCurrentPosition(successCallback, errorCallback);
-                                } else {
-                                    console.log("Geolocation is not supported by this browser.");
-                                }
-
-                                function successCallback(position) {
                                     ref.current = toast("Récupération de la géolocalisation", {
                                         style: {
                                             color: "white",
@@ -60,6 +54,13 @@ function NavBar({ isSearchVisible, setIsSearchvisible, setIsAnimationStart, isho
                                         },
                                         isLoading: true,
                                     });
+                                    navigator.geolocation.getCurrentPosition(successCallback, errorCallback);
+                                } else {
+                                    console.log("Geolocation is not supported by this browser.");
+                                }
+
+                                function successCallback(position) {
+
                                     fetchWeatherByCoordonates(position.coords.longitude, position.coords.latitude)
                                     setIsGeolocation(true);
                                     toast.update(ref.current, { type: "success", autoClose: 5000, isLoading: false, render: "Recupération terminée" });
